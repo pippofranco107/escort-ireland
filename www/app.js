@@ -2,9 +2,10 @@ angular
 
 
 .module('EscortIreland', [
-    'ngMaterial',
+    'ngRoute',
     'ngAnimate',
     'ngMessages',
+    'ngMaterial',
 ])
 
 
@@ -68,12 +69,25 @@ angular
 })
 
 
-.controller('EscortListController', function ($scope, $mdDialog, ListService) {
-  $scope.getList = function () {
+.controller('EscortListController', function ($scope, ListService) {
+  $scope.list = function () {
     return ListService.getAll();
   };
+})
 
-  $scope.removeEscort = function (event, id) {
+
+.controller('EscortController', function ($scope, $location, ListService) {
+  $scope.show = function (id) {
+    var escort = ListService.get(id);
+    if (escort.touring) {
+      $location.url('/escort/' + id);
+    }
+  };
+})
+
+
+.controller('RemoveEscortController', function ($scope, $mdDialog, ListService) {
+  $scope.remove = function (event, id) {
     var escort = ListService.get(id);
     var dialog = $mdDialog.confirm()
       .title('Do you want to delete ' + escort.name + '?')
@@ -85,7 +99,6 @@ angular
       ListService.remove(id);
     });
   };
-
 })
 
 
@@ -101,4 +114,27 @@ angular
       ListService.add(id);
     });
   };
+})
+
+
+.controller('BackToListController', function ($scope, $window) {
+  $scope.back = function () {
+    $window.history.back();
+  };
+})
+
+
+.controller('EscortDetailsController', function ($scope, $routeParams, ListService) {
+  $scope.escort = ListService.get($routeParams.id);
+})
+
+
+.config(function ($routeProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: 'list.html',
+    })
+    .when('/escort/:id', {
+      templateUrl: 'escort.html',
+    });
 })

@@ -23,6 +23,7 @@
     <script type="text/javascript" src="jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="angular.min.js"></script>
     <script type="text/javascript" src="angular-animate.min.js"></script>
+    <script type="text/javascript" src="angular-route.min.js"></script>
     <script type="text/javascript" src="angular-aria.min.js"></script>
     <script type="text/javascript" src="angular-messages.min.js"></script>
     <script type="text/javascript" src="angular-material.min.js"></script>
@@ -31,35 +32,7 @@
 </head>
 
 <body ng-app="EscortIreland" ng-cloak>
-  <div layout="column" layout-fill>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h3>Escort Ireland</h3>
-      </div>
-    </md-toolbar>
-    <md-content>
-      <md-list ng-controller="EscortListController">
-        <md-list-item class="md-3-line" ng-repeat="escort in getList() | orderBy:'name'">
-          <img ng-src="{{escort.picture}}" class="md-avatar"/>
-          <div class="md-list-item-text" ng-if="escort.touring">
-            <h3>{{escort.name}}</h3>
-            <p>{{escort.location}}</p>
-            <p>{{escort.dates}}</p>
-          </div>
-          <div class="md-list-item-text" ng-if="!escort.touring">
-            <h3>{{escort.name}}</h3>
-            <p>Not touring :(</p>
-          </div>
-          <md-button class="md-secondary md-icon-button" ng-click="removeEscort($event, escort.id)" aria-label="Delete">
-            <md-icon md-svg-src="delete.svg"></md-icon>
-          </md-button>
-        </md-list-item>
-      </md-list>
-    </md-content>
-    <md-button class="md-fab md-primary md-fab-bottom-right" ng-controller="AddEscortController" ng-click="addDialog($event)" aria-label="Add">
-      <md-icon md-svg-src="account-plus.svg"></md-icon>
-    </md-button>
-  </div>
+  <ng-view></ng-view>
 </body>
 
 </html>

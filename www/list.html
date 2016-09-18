@@ -1,0 +1,29 @@
+<div layout="column" layout-fill>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h3>Escort Ireland</h3>
+    </div>
+  </md-toolbar>
+  <md-content>
+    <md-list ng-controller="EscortListController">
+      <md-list-item class="md-3-line" ng-repeat="escort in list() | orderBy:'name'" ng-controller="EscortController" ng-click="show(escort.id)">
+        <img ng-src="{{escort.picture}}" class="md-avatar"/>
+        <div class="md-list-item-text" layout="column" ng-if="escort.touring">
+          <h3>{{escort.name}}</h3>
+          <p>{{escort.location}}</p>
+          <p>{{escort.dates}}</p>
+        </div>
+        <div class="md-list-item-text" layout="column" ng-if="!escort.touring">
+          <h3>{{escort.name}}</h3>
+          <p>Not touring &#128542;</p>
+        </div>
+        <md-button class="md-secondary md-icon-button" ng-controller="RemoveEscortController" ng-click="remove($event, escort.id)" aria-label="Delete">
+          <md-icon md-svg-src="delete.svg"></md-icon>
+        </md-button>
+      </md-list-item>
+    </md-list>
+  </md-content>
+  <md-button class="md-fab md-primary md-fab-bottom-right" ng-controller="AddEscortController" ng-click="addDialog($event)" aria-label="Add">
+    <md-icon md-svg-src="account-plus.svg"></md-icon>
+  </md-button>
+</div>
