@@ -6,16 +6,15 @@
   </md-toolbar>
   <md-content>
     <md-list ng-controller="EscortListController">
-      <md-list-item class="md-3-line" ng-repeat="escort in list() | orderBy:'name'" ng-controller="EscortController" ng-click="show(escort.id)">
+      <md-list-item class="md-2-line" ng-repeat="escort in list() | orderBy:'name'" ng-controller="EscortController" ng-click="show(escort.id)">
         <img ng-src="{{escort.picture}}" class="md-avatar"/>
         <div class="md-list-item-text" layout="column" ng-if="escort.touring">
           <h3>{{escort.name}}</h3>
-          <p>{{escort.location}}</p>
-          <p>{{escort.dates}}</p>
+          <h4>{{escort.location}}</h4>
         </div>
         <div class="md-list-item-text" layout="column" ng-if="!escort.touring">
           <h3>{{escort.name}}</h3>
-          <p>Not touring &#128542;</p>
+          <h4>Not touring &#128542;</h4>
         </div>
         <md-button class="md-secondary md-icon-button" ng-controller="RemoveEscortController" ng-click="remove($event, escort.id)" aria-label="Delete">
           <md-icon md-svg-src="delete.svg"></md-icon>

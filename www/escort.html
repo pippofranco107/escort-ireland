@@ -7,7 +7,11 @@
       <h3>Escort Ireland</h3>
     </div>
   </md-toolbar>
-  <md-content>
-    <!-- TODO -->
+  <md-content layout-padding ng-controller="EscortDetailsController">
+    <h2>{{escort().name}}</h2>
+    <p><b>ID</b>: {{escort().id}}</p>
+    <p><b>Current Location</b>: {{escort().location}}</p>
+    <p><b>Tour Dates</b>: {{escort().dates}}</p>
+    <p><b>Phone Number</b>: {{escort().phoneNumbers}}</p>
   </md-content>
 </div>

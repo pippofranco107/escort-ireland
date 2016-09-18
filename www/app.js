@@ -24,7 +24,9 @@ angular
           picture: data.find('section.scrolling-images ul li img').first().attr('src'),
           location: $(data.find('header.profile div.innertube div.tour.cf span.meta')[0]).text(),
           dates: $(data.find('header.profile div.innertube div.tour.cf span.meta')[1]).text(),
-          phoneNumber: data.find('header.profile div.innertube div.contact.cf a.phone').text(),
+          phoneNumbers: data.find('header.profile div.innertube div.contact.cf a.phone').map(function () {
+            return $(this).text();
+          }).get().join(', '),
         };
       } else {
         escort = {
@@ -78,8 +80,7 @@ angular
 
 .controller('EscortController', function ($scope, $location, ListService) {
   $scope.show = function (id) {
-    var escort = ListService.get(id);
-    if (escort.touring) {
+    if (ListService.get(id).touring) {
       $location.url('/escort/' + id);
     }
   };
@@ -125,7 +126,9 @@ angular
 
 
 .controller('EscortDetailsController', function ($scope, $routeParams, ListService) {
-  $scope.escort = ListService.get($routeParams.id);
+  $scope.escort = function () {
+    return ListService.get($routeParams.id);
+  };
 })
 
 
