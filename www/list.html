@@ -20,6 +20,7 @@
         <md-button class="md-secondary md-icon-button" ng-controller="RemoveEscortController" ng-click="remove($event, escort.id)" aria-label="Delete">
           <md-icon md-svg-src="delete.svg"></md-icon>
         </md-button>
+        <md-divider md-inset ng-if="!$last"></md-divider>
       </md-list-item>
     </md-list>
   </md-content>
